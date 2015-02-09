@@ -1,25 +1,26 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
 
 
-  body
-    block content
-    script(src='/javascripts/jquery-1.8.3.min.js')
-    script(src='/javascripts/backbone/lib/underscore-min.js')
-    script(src='/javascripts/backbone/lib/backbone-min.js')
-    script(src="/socket.io/socket.io.js")
-    script(src='/javascripts/do.js')
-    script.
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32830193-1']);
-      _gaq.push(['_setDomainName', 'ishuah.com']);
-      _gaq.push(['_trackPageview']);
+    body
+        block content
+        script(src='/javascripts/jquery-1.8.3.min.js')
+        script(src='/javascripts/backbone/lib/underscore-min.js')
+        script(src='/javascripts/backbone/lib/backbone-min.js')
+        script(src='/socket.io/socket.io.js')
+        script(src='/javascripts/connectionManager.js')
+        script(src='/javascripts/do.js')
+        script.
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-32830193-1']);
+          _gaq.push(['_setDomainName', 'ishuah.com']);
+          _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();

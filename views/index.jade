@@ -1,18 +1,51 @@
 extends layout
 
 block content
-     p <a href="https://github.com/ishuah91/Nodejs-MongoDb-TodoMVC"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
-     section#todo
-      header#header
-       h1 todos
-       form( id='todo-form')
-        input(id='new-todo', placeholder="What needs to be done?", name='title')
-      section#main
-       input(id="toggle-all", type="checkbox")
-       ul#todo-list
-      footer#footer
-     div#info
-      p Double-click to edit a todo
-      p Written by <a href="https://twitter.com/ishuah_" target="blank_">Ishuah Kariuki</a> based on TodoMVC by <a href="https://github.com/addyosmani" target="blank_">Addy Osmani</a>
-      p Node.js | Express.js | Mongoose.js | MongoDb
-      p The write-up, coming soon
+    script(src='/javascripts/underscore/underscore.js')
+    script(src='/javascripts/acisionsdk-javascript-v1.2.0/sdk.min.js')
+    audio(id='audio-remote')
+    div#login-form
+        p.subheading Login with forge account to discuss with other users
+        label Username
+        input(type="text", name="user", id='username').span4.required
+        label Password
+        input(type="password", name="pass", id='password').span4.required
+        input(type="button", id='login-submit', value='Login')
+    div#user-data
+        div#greeting
+            span#user-name
+            span#user-status
+        div#radio
+            label Available
+            label#radio
+                input(type="radio", name="availibility", id="option-available", value="available", checked="checked")
+                |Yes
+
+            label#radio
+                input(type="radio", name="availibility", id="option-unavailable", value="unavailable")
+                |No
+    section#main
+        div#users
+            div#user-list-wrapper
+                table#user-list
+                    tr
+                        th#name Name
+                        th#status Status
+                        th#actions Actions
+            div#discuss
+                textarea(id='messages', readonly='readonly')
+                input(type="text", name="message-input", id='message-input')
+                input(type="button", id='send-message', value='Send message to online members')
+        section(class="todos", id="todo")
+            header#header
+                form( id='todo-form')
+                    input(id='new-todo', placeholder="What needs to be done?", name='title')
+            section#main
+                input(id="toggle-all", type="checkbox")
+                ul#todo-list
+            footer#footer
+        div#info
+            p Double-click to edit a todo
+            p Written by <a href="https://twitter.com/ishuah_" target="blank_">Ishuah Kariuki</a> based on TodoMVC by <a href="https://github.com/addyosmani" target="blank_">Addy Osmani</a>
+            p Node.js | Express.js | Mongoose.js | MongoDb
+            p The write-up, coming soon

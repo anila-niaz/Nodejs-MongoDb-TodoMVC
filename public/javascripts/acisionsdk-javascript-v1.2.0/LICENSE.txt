@@ -1,0 +1,8 @@
+Copyright (c) Acision 2014. All rights reserved.
+
+This documentation and software (except where indicated) is Copyright (c) 2014 Acision with all 
+rights reserved. You are only permitted to use this documentation and software within the dates 
+specified and under the terms granted to you by your trial agreement with Acision.  If you do not
+have a trial agreement with Acision, breach the terms of your trial agreement with Acision, or are
+outside of the dates specified in your trial agreement with Acision you may not use this
+documentation or software.
