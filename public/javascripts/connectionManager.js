@@ -14,7 +14,7 @@ var ConnectionManager = function(socket){
     /*
         Connects a user to acision sdk and registers for messages and audio calls
      */
-    this.connect = function(username, password, authenticationSuccessCallback, messageReceivedCallback){
+    this.connect = function(username, password, authenticationSuccessCallback, messageReceivedCallback, audioCallback){
         acisionSDK = new AcisionSDK(API_KEY, {
             onConnected: function() {
                 console.log("Authentication succeded");
@@ -26,7 +26,17 @@ var ConnectionManager = function(socket){
                     onIncomingSession: function(event) {
                         session = event.session;
                         session.remoteAudioElement = document.getElementById("audio-remote");
+                        session.setCallbacks({
+                            onClose: function(){
+                                audioCallback('closed');
+                            },
+
+                            onConnect: function(){
+                                audioCallback('calling');
+                            }
+                        });
                         session.accept();
+
                     }
                 });
 
@@ -163,12 +173,21 @@ var ConnectionManager = function(socket){
 
     };
 
-    this.callUser = function(userAddress){
+    this.callUser = function(userAddress, audioCallback){
         if(session){
             session.close('normal');
             return session = undefined;
         }
         session = acisionSDK.webrtc.connect(userAddress);
+        session.setCallbacks({
+            onClose: function(){
+                audioCallback('closed');
+            },
+
+            onConnect: function(){
+                audioCallback('calling');
+            }
+        });
         session.remoteAudioElement = document.getElementById("audio-remote");
     };
 };

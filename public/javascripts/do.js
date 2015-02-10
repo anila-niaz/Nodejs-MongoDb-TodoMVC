@@ -19,6 +19,7 @@ jQuery(function($){
             connection = new ConnectionManager(socket);
 
             $('#user-data').hide();
+            $('#end-call').hide();
         },
 
         persist: function(new_todo){
@@ -53,7 +54,8 @@ jQuery(function($){
 
                 connection.connect(username, password,
                     authenticatioSuccessCallback,
-                    messageReceivedCallback);
+                    messageReceivedCallback,
+                    audioCallback);
 
                 function messageReceivedCallback(message){
                     $('#messages').text( $('#messages').text() + '\n' + message.from + ': ' + message.content);
@@ -74,17 +76,22 @@ jQuery(function($){
             });
 
             $('.call-user').live('click', function(event){
-                var button = $('.call-user');
-                if(button.attr("value") == "Call")
-                    button.attr("value", "End call");
-                else
-                    button.attr("value", "Call");
                 var value = event.target.parentElement.parentElement.firstChild.innerText;
                 for(var i = 0; i < users.length; i++){
                     if(users[i].name == value)
-                        connection.callUser(users[i].address);
+                        connection.callUser(users[i].address, audioCallback);
                 }
             });
+            $('#end-call').live('click', function(event){
+                connection.callUser();
+                $('#end-call').hide();
+            });
+            function audioCallback(type){
+                if(type == 'closed')
+                    $('#end-call').hide();
+                else
+                    $('#end-call').show()
+            }
             $('#send-message').live('click', function(){
                 var message = document.getElementById("message-input").value ;
                 connection.sendMessageToAvailableUsers(users, message);
